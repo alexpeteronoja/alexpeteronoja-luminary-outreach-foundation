@@ -378,3 +378,115 @@
 
      }
  });
+
+
+
+ //  Payment Script
+
+ $("#make-payment").submit(function(event) {
+     event.preventDefault(); // Prevent default form submission
+
+     isValid = true;
+
+     // Getting Variables
+     var name = $("#name").val();
+     var emailForm = $("#email").val();
+     var phoneNo = $("#phone-number").val();
+     var amount = $("#amount-paid").val();
+     var currency = $('[name="currency"]:checked').val();
+
+     // Email Verification
+     function validate(email) {
+         const emailValidation = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+         return emailValidation.test(email);
+     }
+
+     //  Number Validation
+     var numberValidation = /^\d+(\.\d{1,2})?$/; // Regular expression to allow only digits (0-9);
+
+     //  Phone Number Validation
+     var phoneValidation = /^\+?\d{7,15}$/;
+
+     // Error Message
+     //  Name Error
+
+     if (name === "") {
+         $("#name-error").removeClass("d-none");
+         isValid = false;
+     } else {
+         $("#name-error").addClass("d-none");
+     }
+
+     //  email Error
+
+     if (emailForm === "") {
+         $("#email-error").text("This field is required");
+         isValid = false;
+     } else if (!validate(emailForm)) {
+         $("#email-error").text("Please enter a valid email address");
+         isValid = false;
+     } else {
+         $("#email-error").text("");
+     }
+
+     //  Phone Number Error
+
+     if (phoneNo === "") {
+         $("#phone-error").text("This field is required");
+         isValid = false;
+     } else if (!phoneValidation.test(phoneNo)) {
+         $("#phone-error").text("Please Enter a Valid Phone Number");
+         isValid = false;
+     } else {
+         $("#phone-error").text("")
+     }
+
+     //  Amount Validation
+
+     if (amount === "") {
+         $("#amount-error").text("This field is required");
+         isValid = false;
+     } else if (!numberValidation.test(amount)) {
+         $("#amount-error").text("Please enter a valid Amount");
+         isValid = false;
+     } else {
+         $("#amount-error").text("");
+     }
+
+     //  Currency Validation
+
+     if (!currency) {
+         $("#select-currency").removeClass("d-none");
+         isValid = false;
+     } else {
+         $("#select-currency").addClass("d-none")
+     }
+
+     if (isValid) {
+
+         FlutterwaveCheckout({
+             public_key: "FLWPUBK-266b07023e924dd76713dc1b05600ee1-X",
+             tx_ref: "TX_REF_" + Math.floor(Math.random() * 10000000),
+             amount: amount,
+             currency: currency,
+             payment_options: 'card, mobilemoneyghana, ussd, banktransfer, ussd, opay, account, googlepay, applepay',
+             redirect_url: 'https://glaciers.titanic.com/handle-flutterwave-payment',
+             meta: {
+                 consumer_id: 23,
+                 consumer_mac: '92a3-912ba-1192a',
+             },
+             customer: {
+                 email: emailForm,
+                 phone_number: phoneNo,
+                 name: name,
+             },
+             customizations: {
+                 title: 'Luminary Outreach Foundation',
+                 description: 'Donation Payment',
+                 logo: '/images/logo.jpg',
+             },
+         });
+
+     }
+
+ })
