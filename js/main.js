@@ -470,7 +470,7 @@
              amount: amount,
              currency: currency,
              payment_options: 'card, mobilemoneyghana, ussd, banktransfer, ussd, opay, account, googlepay, applepay',
-             redirect_url: 'https://glaciers.titanic.com/handle-flutterwave-payment',
+             redirect_url: 'https://luminaryoutreachfoundation.org/thank-you-for-donating.html',
              meta: {
                  consumer_id: 23,
                  consumer_mac: '92a3-912ba-1192a',
@@ -490,6 +490,8 @@
      }
 
  });
+
+ //  Donation Modal
 
  function closeBanner() {
      document.getElementById("stickyBanner").style.display = "none";
