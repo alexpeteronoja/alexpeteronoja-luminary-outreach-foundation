@@ -483,10 +483,14 @@
              customizations: {
                  title: 'Luminary Outreach Foundation',
                  description: 'Donation Payment',
-                 logo: '/images/logo.jpg',
+                 logo: 'https://luminaryoutreachfoundation.org/images/logo.jpg',
              },
          });
 
      }
 
- })
+ });
+
+ function closeBanner() {
+     document.getElementById("stickyBanner").style.display = "none";
+ }

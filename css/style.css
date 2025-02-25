@@ -2833,6 +2833,32 @@ input[type=radio]:checked:before {
     column-gap: 10px;
 }
 
+
+/* Donation Modal */
+
+.sticky-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #343a40;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
 @-webkit-keyframes loader-rotate {
     100% {
         -webkit-transform: rotate(360deg);
